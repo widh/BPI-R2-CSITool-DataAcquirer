@@ -1,5 +1,4 @@
 #!/usr/bin/sudo /bin/bash
-modprobe -r mac80211 cfg80211
 modprobe iwlwifi debug=0x40000
 ifconfig wlp1s0 2>/dev/null 1>/dev/null
 while [ $? -ne 0 ]
