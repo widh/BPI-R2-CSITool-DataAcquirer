@@ -1,6 +1,27 @@
-This repo hosts the supplementary utilities, firmware, etc., needed for the
-Linux 802.11n CSI Tool.  See the [project
-website](http://dhalperi.github.com/linux-80211n-csitool/) for more info.
+# POSCA CSI tool
 
-**License:**
-See the [project FAQ](http://dhalperi.github.com/linux-80211n-csitool/faq.html) for licensing information.
+This repository contains modified csitool for BPI-R2 for data acquiring.  
+
+## Preparation
+#### Install libraries
++ Install `libpcap-dev`  
++ Git clone `https://github.com/dhalperi/lorcon-old.git`  
++ `make` and `sudo make install` on `./lorcon-old/`  
++ Git clone `https://github.com/widh/posca-csi`  
+
+## On transmitter
+```
+./prepare_tx.sh
+cd ./injection; make
+./log_to_file [packet_count] [packet_size] 1
+```
+
+## On receiver
+```
+./prepare_rx.sh
+cd ./capture; make
+./log_to_file [filename].dat
+```
+
+## License
+See the [based project FAQ](http://dhalperi.github.com/linux-80211n-csitool/faq.html) for licensing information.
