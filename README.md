@@ -7,6 +7,8 @@ This repository contains modified csitool for BPI-R2 for data acquiring.
 + Install `libpcap-dev`  
 + Git clone `https://github.com/dhalperi/lorcon-old.git`  
 + `make` and `sudo make install` on `./lorcon-old/`  
+
+#### Download this repository
 + Git clone `https://github.com/widh/posca-csi`  
 
 ## On transmitter
