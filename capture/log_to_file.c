@@ -82,8 +82,11 @@ int main(int argc, char** argv)
 			exit_program_err(-1, "recv");
 		/* Pull out the message portion and print some stats */
 		cmsg = NLMSG_DATA(buf);
+		printf("[bytelen=%d]", cmsg->len);
 		if (count % SLOW_MSG_CNT == 0)
 			printf("received %d bytes: id: %d val: %d seq: %d clen: %d\n", cmsg->len, cmsg->id.idx, cmsg->id.val, cmsg->seq, cmsg->len);
+		else
+			printf("\n");
 		/* Log the data to file */
 		l = (unsigned short) cmsg->len;
 		l2 = htons(l);
