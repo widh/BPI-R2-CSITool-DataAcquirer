@@ -82,7 +82,8 @@ int main(int argc, char** argv)
 			exit_program_err(-1, "recv");
 		/* Pull out the message portion and print some stats */
 		cmsg = NLMSG_DATA(buf);
-		// printf("[bytelen=%d]", cmsg->len);
+		printf(".");
+		// printf("[bytelen=%d] ", cmsg->len);
 		// if (count % SLOW_MSG_CNT == 0)
 		// 	printf("received %d bytes: id: %d val: %d seq: %d clen: %d\n", cmsg->len, cmsg->id.idx, cmsg->id.val, cmsg->seq, cmsg->len);
 		// else
@@ -93,7 +94,7 @@ int main(int argc, char** argv)
 		fwrite(&l2, 1, sizeof(unsigned short), out);
 		ret = fwrite(cmsg->data, 1, l, out);
 		if (count % 100 == 0)
-			printf("wrote %d bytes [msgcnt=%u]\n", ret, count);
+			printf("* = wrote %d bytes [msgcnt=%u]\n", ret, count);
 		++count;
 		if (ret != l)
 			exit_program_err(1, "fwrite");
