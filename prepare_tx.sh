@@ -20,9 +20,9 @@ iw dev wlp1s0 interface add mon0 type monitor
 ifconfig mon0 up
 
 # Set channel
-iw mon0 set channel 64 HT40-
+iw dev mon0 set channel 64 HT40-
 
 # Set transaction rate
 # Use all 3 antenna, send with 3 stream
-echo 0x1c917 | sudo tee `sudo find /sys/kernel/debug/ieee80211 -name monitor_tx_rate` 1>/dev/null
+echo 0x1c913 | sudo tee `sudo find /sys -name monitor_tx_rate` 1>/dev/null
 
