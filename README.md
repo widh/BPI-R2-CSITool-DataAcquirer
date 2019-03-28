@@ -55,6 +55,6 @@ With referring [here](https://github.com/widh/BPI-R2-CSITool-Kernel/blob/master/
 If you changed HT mode, you should change `# Set channel` part of `prepare_tx.sh` and `prepare_rx.sh`.  
 
 ## License
-This repository is based on [linux-80211n-csitool-supplementary](http://dhalperi.github.com/linux-80211n-csitool-supplementary).  
-See the [based project FAQ](http://dhalperi.github.com/linux-80211n-csitool/faq.html) for licensing information.  
+This repository is based on [linux-80211n-csitool-supplementary](http://github.com/dhalperi/linux-80211n-csitool-supplementary).  
+See the [based project FAQ](http://dhalperi.github.io/linux-80211n-csitool/faq.html) for licensing information.  
 
