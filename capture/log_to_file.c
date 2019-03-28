@@ -74,6 +74,8 @@ int main(int argc, char** argv)
 	signal(SIGINT, caught_signal);
 
 	/* Poll socket forever waiting for a message */
+	setbuf(stdout, NULL);
+	printf("Writing logs to %s...\n", argv[1]);
 	while (1)
 	{
 		/* Receive from socket with infinite timeout */
@@ -82,13 +84,19 @@ int main(int argc, char** argv)
 			exit_program_err(-1, "recv");
 		/* Pull out the message portion and print some stats */
 		cmsg = NLMSG_DATA(buf);
+    fprintf(stdout, ".");
 		/* Log the data to file */
 		l = (unsigned short) cmsg->len;
 		l2 = htons(l);
 		fwrite(&l2, 1, sizeof(unsigned short), out);
 		ret = fwrite(cmsg->data, 1, l, out);
-		if (++count % 100 == 0)
-			printf("Wrote %d bytes [msgcnt=%u]\n", ret, count);
+		if (l > ret) {
+		  printf("\nError on writing! %d > %d\n", l, ret);
+		} else if (count % 1000 == 0) {
+		  int kCount = count / 1000;
+			printf("\nWrote %d kb in total [msgcnt=%uk]\n", ret * kCount, kCount);
+		}
+		count++;
 		if (ret != l)
 			exit_program_err(1, "fwrite");
 	}
