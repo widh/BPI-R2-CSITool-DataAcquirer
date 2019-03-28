@@ -7,3 +7,4 @@ bf_to_eff.o
 util.o
 q_approx.o
 iwl_nl.o
+connector_users.h
