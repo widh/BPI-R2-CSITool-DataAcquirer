@@ -46,9 +46,11 @@ By simply change `# Set Channel` part, you can easily change channel.
 You have to change `prepare_tx.sh` and `prepare_rx.sh`.  
 In `# Set transaction rate` part of `prepare_tx.sh`, there is a strange hex integer: `0x1C913`.  
 This is a summation below.  
+
 + `0x1c000` : Use all antennas → Related to MIMO  
 + `0x00900` : HT40 mode → Related to HT mode  
 + `0x00013` : The number of streams and MCS → Related to MIMO and MCS  
+
 With referring [here](https://github.com/widh/BPI-R2-CSITool-Kernel/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L246), you can change this flag parameter as your intention.  
 If you changed HT mode, you should change `# Set channel` part of `prepare_tx.sh` and `prepare_rx.sh`.  
 
