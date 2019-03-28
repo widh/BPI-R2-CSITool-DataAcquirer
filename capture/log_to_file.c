@@ -84,7 +84,7 @@ int main(int argc, char** argv)
 			exit_program_err(-1, "recv");
 		/* Pull out the message portion and print some stats */
 		cmsg = NLMSG_DATA(buf);
-    fprintf(stdout, ".");
+		fprintf(stdout, ".");
 		/* Log the data to file */
 		l = (unsigned short) cmsg->len;
 		l2 = htons(l);
