@@ -1,6 +1,6 @@
-# BPI-R2 CSITool Data Acquirer
+# BPI-R2 CSITool Data Collector
 
-This repository contains modified csitool for BPI-R2 for data acquiring.  
+This repository contains modified csitool for BPI-R2 for data acquisition.  
 
 ## Preparation
 #### Kernel & Driver
@@ -11,8 +11,8 @@ Please refer [this README](https://github.com/widh/BPI-R2-CSITool-Kernel#readme)
 + `make` and `sudo make install` on `./lorcon-old/`  
 
 #### Download this repository
-+ Git clone `https://github.com/widh/BPI-R2-CSITool-DataAcquirer`  
-+ `cd BPI-R2-CSITool-DataAcquirer`
++ Git clone `https://github.com/widh/BPI-R2-CSITool-DataCollector`  
++ `cd BPI-R2-CSITool-DataCollector`
 
 #### Install firmware
 + `sudo cp firmware/iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode`  
@@ -33,7 +33,7 @@ cd ./capture; make
 ```
 
 ## How to use recorded `.dat` file
-Please refer to [this README](https://github.com/widh/POSCA-tools#readme).  
+Please refer to [this README](https://github.com/widh/SEA-tools#readme).  
 
 ## About channels, HT mode, MIMO, MCS
 I configured the script to use channel 64 in HT40- mode, and to use 3x3 MIMO.  
@@ -51,7 +51,7 @@ This is a summation below.
 + `0x00900` : HT40 mode → Related to HT mode  
 + `0x00013` : The number of streams and MCS → Related to MIMO and MCS  
 
-With referring [here](https://github.com/widh/BPI-R2-CSITool-Kernel/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L246), you can change this flag parameter as your intention.  
+With referring [here](https://github.com/widh/BPI-R2-CSITool-Kernel/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L245-L333), you can change this flag parameter as your intention.  
 If you changed HT mode, you should change `# Set channel` part of `prepare_tx.sh` and `prepare_rx.sh`.  
 
 ## License
