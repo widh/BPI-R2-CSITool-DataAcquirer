@@ -33,7 +33,7 @@ cd ./capture; make
 ```
 
 ## How to use recorded `.dat` file
-Please refer to [this README](https://github.com/widh/syaa-tools#readme).  
+Please refer to [this README](https://github.com/widh/15na-tools#readme).  
 
 ## About channels, HT mode, MIMO, MCS
 I configured the script to use channel 64 in HT40- mode, and to use 3x3 MIMO.  
