@@ -3,6 +3,12 @@
 # Turn off all network-related services
 systemctl stop network-manager 2>/dev/null 1>/dev/null
 systemctl stop wicd 2>/dev/null 1>/dev/null
+systemctl stop rsyslog 2>/dev/null 1>/dev/null
+systemctl stop syslog.socket 2>/dev/null 1>/dev/null
+systemctl stop systemd-journald 2>/dev/null 1>/dev/null
+systemctl stop systemd-journald-dev-log.socket 2>/dev/null 1>/dev/null
+systemctl stop systemd-journald-audit.socket 2>/dev/null 1>/dev/null
+systemctl stop systemd-journald.socket 2>/dev/null 1>/dev/null
 
 # Reload driver with IWL_BFEE_NOTIF_MSK flag
 modprobe -r iwldvm
