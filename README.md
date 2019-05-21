@@ -22,7 +22,7 @@ Please refer [this README](https://github.com/widh/BPI-R2-CSITool-Kernel#readme)
 ```
 ./prepare_tx.sh
 cd ./injection; make
-./log_to_file [packet_count] [packet_size] 1
+./random_packets [packet_count] [packet_size] 1
 ```
 
 ## On receiver
