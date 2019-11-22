@@ -24,5 +24,5 @@ iw dev mon0 set channel 64 HT40-
 
 # Set transaction rate
 # Use all 3 antenna, send with 3 stream
-echo 0x1cd01 | sudo tee `sudo find /sys -name monitor_tx_rate` 1>/dev/null
+echo 0x0cd01 | sudo tee `sudo find /sys -name monitor_tx_rate` 1>/dev/null
 

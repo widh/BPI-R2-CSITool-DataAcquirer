@@ -1,4 +1,4 @@
-all: print_packets get_first_bfee parse_log log_to_file nl_bf_to_eff
+all: test_trx print_packets get_first_bfee parse_log log_to_file nl_bf_to_eff
 
 KERNEL = $(strip $(shell uname -r))
 KERNEL_SOURCE = /lib/modules/$(KERNEL)/build

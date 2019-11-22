@@ -59,7 +59,7 @@ int main(int argc, char** argv)
 		/* Beamforming packet */
 		if (code == 0xBB) {
 			bfee = (void *)&buf[1];
-			printf("rate=0x%x\n", bfee->fake_rate_n_flags);
+			printf("rate=0x%x   Tx=%d   Rx=%d\n", bfee->fake_rate_n_flags, bfee->Ntx, bfee->Nrx);
 		}
 
 		/* Read the next entry size */
