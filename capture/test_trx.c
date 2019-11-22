@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 	struct cn_msg *cmsg;
 	char buf[4096];
 	int ret;
-	unsigned short l, l2;
+	unsigned short l;
 	int count = 0;
 
 	/* Make sure usage is correct */
