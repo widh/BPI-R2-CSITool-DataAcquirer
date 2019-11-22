@@ -17,11 +17,6 @@
 #define SLOW_MSG_CNT 1
 
 int sock_fd = -1;							// the socket
-FILE* out = NULL;
-
-void check_usage(int argc, char** argv);
-
-FILE* open_file(char* filename, char* spec);
 
 void caught_signal(int sig);
 
@@ -37,12 +32,6 @@ int main(int argc, char** argv)
 	int ret;
 	unsigned short l;
 	int count = 0;
-
-	/* Make sure usage is correct */
-	check_usage(argc, argv);
-
-	/* Open and check log file */
-	out = open_file(argv[1], "w");
 
 	/* Setup the socket */
 	sock_fd = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_CONNECTOR);
@@ -85,8 +74,6 @@ int main(int argc, char** argv)
 			exit_program_err(-1, "recv");
 		/* Pull out the message portion and print some stats */
 		cmsg = NLMSG_DATA(buf);
-		//fprintf(stdout, ".");
-		/* Log the data to file */
 		l = (unsigned short) cmsg->len;
 		if (l > ret) {
 		  printf("\nError on writing! %d > %d\n", l, ret);
@@ -104,26 +91,6 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-void check_usage(int argc, char** argv)
-{
-	if (argc != 2)
-	{
-		fprintf(stderr, "Usage: %s <output_file>\n", argv[0]);
-		exit_program(1);
-	}
-}
-
-FILE* open_file(char* filename, char* spec)
-{
-	FILE* fp = fopen(filename, spec);
-	if (!fp)
-	{
-		perror("fopen");
-		exit_program(1);
-	}
-	return fp;
-}
-
 void caught_signal(int sig)
 {
 	fprintf(stderr, "Caught signal %d\n", sig);
@@ -132,11 +99,6 @@ void caught_signal(int sig)
 
 void exit_program(int code)
 {
-	if (out)
-	{
-		fclose(out);
-		out = NULL;
-	}
 	if (sock_fd != -1)
 	{
 		close(sock_fd);
