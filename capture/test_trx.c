@@ -65,7 +65,6 @@ int main(int argc, char** argv)
 
 	/* Poll socket forever waiting for a message */
 	setbuf(stdout, NULL);
-	printf("Writing logs to %s...\n", argv[1]);
 	while (1)
 	{
 		/* Receive from socket with infinite timeout */
@@ -83,8 +82,6 @@ int main(int argc, char** argv)
 		  printf("Tx=%d  Rx=%d  |  Wrote %d kb in total [msgcnt=%uk]\n", bfee->Ntx, bfee->Nrx, ret * kCount, kCount);
 		}
 		count++;
-		if (ret != l)
-			exit_program_err(1, "fwrite");
 	}
 
 	exit_program(0);
