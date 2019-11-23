@@ -1,4 +1,4 @@
-all: test_trx print_packets get_first_bfee parse_log log_to_file nl_bf_to_eff
+all: test print_packets get_first_bfee parse_log log_to_file nl_bf_to_eff
 
 KERNEL = $(strip $(shell uname -r))
 KERNEL_SOURCE = /lib/modules/$(KERNEL)/build
@@ -17,7 +17,7 @@ CC = gcc
 
 nl_bf_to_eff: nl_bf_to_eff.c bf_to_eff.o iwl_nl.o util.o q_approx.o
 
-test_trx.c: iwl_connector.h
+test.c: iwl_connector.h
 
 log_to_file.c: iwl_connector.h
 

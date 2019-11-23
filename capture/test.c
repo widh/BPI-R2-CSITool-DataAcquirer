@@ -32,7 +32,8 @@ int main(int argc, char** argv)
 	char buf[4096];
 	int ret;
 	unsigned short l;
-	int count = 0;
+	unsigned int count = 0;
+	float firstTimestamp = 0;
 
 	/* Setup the socket */
 	sock_fd = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_CONNECTOR);
@@ -81,7 +82,15 @@ int main(int argc, char** argv)
 		} else if (count % 1000 == 0) {
 		  int kCount = count / 1000;
 		  struct iwl_bfee_notif *bfee = (void *) &cmsg->data[1];
-		  printf("Tx=%d  Rx=%d  |  Wrote %d kb in total [msgcnt=%uk]\n", bfee->Ntx, bfee->Nrx, ret * kCount, kCount);
+		  float pps = 0;
+		  float ts = ((float) bfee->timestamp_low) * 1.0e-6;
+		  if (count == 0) {
+			  firstTimestamp = ts;
+			  printf("First timestamp is %.3f\n", firstTimestamp);
+		  } else {
+			  pps = (float) count / (ts - firstTimestamp);
+		  }
+		  printf("Tx=%d  Rx=%d  AvgPPS=%.3f  |  Wrote %d kb in total [msgcnt=%uk]\n", bfee->Ntx, bfee->Nrx, pps, ret * kCount, kCount);
 		}
 		count++;
 	}
