@@ -1,5 +1,6 @@
 /*
  * (c) 2008-2011 Daniel Halperin <dhalperi@cs.washington.edu>
+ * and.. Modified by Jio Gim
  */
 #include "iwl_connector.h"
 #include "bfee.h"
@@ -65,6 +66,7 @@ int main(int argc, char** argv)
 
 	/* Poll socket forever waiting for a message */
 	setbuf(stdout, NULL);
+	printf("Started to get packets!\n");
 	while (1)
 	{
 		/* Receive from socket with infinite timeout */

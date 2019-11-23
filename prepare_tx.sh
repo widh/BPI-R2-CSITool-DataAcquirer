@@ -23,6 +23,7 @@ ifconfig mon0 up
 iw dev mon0 set channel 64 HT40-
 
 # Set transaction rate
-# Use all 3 antenna, send with 3 stream
-echo 0x0cd01 | sudo tee `sudo find /sys -name monitor_tx_rate` 1>/dev/null
+# Use 2 antennas, send with 2 stream
+# Run ./get_flag.js to get flags
+echo 0xcd09 | sudo tee `sudo find /sys -name monitor_tx_rate` 1>/dev/null
 

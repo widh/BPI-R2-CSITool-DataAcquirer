@@ -35,24 +35,16 @@ cd ./capture; make
 ## How to use recorded `.dat` file
 Please refer to [this README](https://github.com/wldh-g/15na-tools#readme).  
 
-## About channels, HT mode, MIMO, MCS
-I configured the script to use channel 64 in HT40- mode, and to use 3x3 MIMO.  
+## About channels, MIMO, MCS
+Initially the scripts are configured to use channel 64 in HT40- mode, and to use 2x3 MIMO.  
 
-#### Changing channel
-You have to change `prepare_tx.sh` and `prepare_rx.sh`.  
-By simply change `# Set Channel` part, you can easily change channel.  
+#### Changing Antennas (MIMO) & MCS
+You have to change `prepare_tx.sh`.  
+In `# Set transaction rate` part of `prepare_tx.sh`, there is a strange hex integer: `0xcd09`. That may the only part you're going to modify.  
 
-#### Changing MIMO, MCS, and HT mode
-You have to change `prepare_tx.sh` and `prepare_rx.sh`.  
-In `# Set transaction rate` part of `prepare_tx.sh`, there is a strange hex integer: `0x1CD13`.  
-This is a summation below.  
+Using `get_flags.js`, you can get proper flag code by giving the data rate and the number of antenna you use.
 
-+ `0x1c000` : Use all antennas → Related to MIMO  
-+ `0x00d00` : HT40 mode → Related to HT mode  
-+ `0x00013` : The number of streams and MCS → Related to MIMO and MCS  
-
-With referring [here](https://github.com/wldh-g/BPI-R2-CSITool-Kernel/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L245-L333), you can change this flag parameter as your intention.  
-If you changed HT mode, you should change `# Set channel` part of `prepare_tx.sh` and `prepare_rx.sh`.  
+The detail for the flag is described at [here](https://github.com/wldh-g/BPI-R2-CSITool-Kernel/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L245-L333).
 
 ## License
 This repository is based on [linux-80211n-csitool-supplementary](http://github.com/dhalperi/linux-80211n-csitool-supplementary).  
