@@ -1,7 +1,9 @@
 /*
  * (c) 2008-2011 Daniel Halperin <dhalperi@cs.washington.edu>
+ * and.. Modified by Jio Gim
  */
 #include "iwl_connector.h"
+#include "bfee.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,11 +18,6 @@
 #define SLOW_MSG_CNT 1
 
 int sock_fd = -1; // the socket
-FILE *out = NULL;
-
-void check_usage(int argc, char **argv);
-
-FILE *open_file(char *filename, char *spec);
 
 void caught_signal(int sig);
 
@@ -34,14 +31,9 @@ int main(int argc, char **argv)
   struct cn_msg *cmsg;
   char buf[4096];
   int ret;
-  unsigned short l, l2;
-  int count = 0;
-
-  /* Make sure usage is correct */
-  check_usage(argc, argv);
-
-  /* Open and check log file */
-  out = open_file(argv[1], "w");
+  unsigned short l;
+  unsigned int count = 0;
+  float firstTimestamp = 0;
 
   /* Setup the socket */
   sock_fd = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_CONNECTOR);
@@ -75,7 +67,7 @@ int main(int argc, char **argv)
 
   /* Poll socket forever waiting for a message */
   setbuf(stdout, NULL);
-  printf("Writing logs to %s...\n", argv[1]);
+  printf("Started to get packets!\n");
   while (1)
   {
     /* Receive from socket with infinite timeout */
@@ -84,12 +76,7 @@ int main(int argc, char **argv)
       exit_program_err(-1, "recv");
     /* Pull out the message portion and print some stats */
     cmsg = NLMSG_DATA(buf);
-    fprintf(stdout, ".");
-    /* Log the data to file */
     l = (unsigned short)cmsg->len;
-    l2 = htons(l);
-    fwrite(&l2, 1, sizeof(unsigned short), out);
-    ret = fwrite(cmsg->data, 1, l, out);
     if (l > ret)
     {
       printf("\nError on writing! %d > %d\n", l, ret);
@@ -97,35 +84,25 @@ int main(int argc, char **argv)
     else if (count % 1000 == 0)
     {
       int kCount = count / 1000;
-      printf("\nWrote %d kb in total [msgcnt=%uk]\n", ret * kCount, kCount);
+      struct iwl_bfee_notif *bfee = (void *)&cmsg->data[1];
+      float pps = 0;
+      float ts = ((float)bfee->timestamp_low) * 1.0e-6;
+      if (count == 0)
+      {
+        firstTimestamp = ts;
+        printf("First timestamp is %.3f\n", firstTimestamp);
+      }
+      else
+      {
+        pps = (float)count / (ts - firstTimestamp);
+      }
+      printf("Tx=%d  Rx=%d  AvgPPS=%.3f  |  Wrote %d kb in total [msgcnt=%uk]\n", bfee->Ntx, bfee->Nrx, pps, ret * kCount, kCount);
     }
     count++;
-    if (ret != l)
-      exit_program_err(1, "fwrite");
   }
 
   exit_program(0);
   return 0;
-}
-
-void check_usage(int argc, char **argv)
-{
-  if (argc != 2)
-  {
-    fprintf(stderr, "Usage: %s <output_file>\n", argv[0]);
-    exit_program(1);
-  }
-}
-
-FILE *open_file(char *filename, char *spec)
-{
-  FILE *fp = fopen(filename, spec);
-  if (!fp)
-  {
-    perror("fopen");
-    exit_program(1);
-  }
-  return fp;
 }
 
 void caught_signal(int sig)
@@ -136,11 +113,6 @@ void caught_signal(int sig)
 
 void exit_program(int code)
 {
-  if (out)
-  {
-    fclose(out);
-    out = NULL;
-  }
   if (sock_fd != -1)
   {
     close(sock_fd);

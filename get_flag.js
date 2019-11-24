@@ -122,4 +122,3 @@ let RateFlags = (0b00000000000000000
 );
 console.log(`iwlagn rate flags     :  0x${RateFlags.toString(16)}`);
 console.log(`wanna bitwise detail? :  0b${RateFlags.toString(2)}`);
-

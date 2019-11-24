@@ -11,7 +11,7 @@ modprobe iwlwifi debug=0x40000
 # Loop until driver loaded
 ifconfig wlp1s0 2>/dev/null 1>/dev/null
 while [ $? -ne 0 ]; do
-	ifconfig wlp1s0 2>/dev/null 1>/dev/null
+  ifconfig wlp1s0 2>/dev/null 1>/dev/null
 done
 ifconfig wlp1s0 down
 
@@ -26,4 +26,3 @@ iw dev mon0 set channel 64 HT40-
 # Use 2 antennas, send with 2 stream
 # Run ./get_flag.js to get flags
 echo 0xcd09 | sudo tee `sudo find /sys -name monitor_tx_rate` 1>/dev/null
-

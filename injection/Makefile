@@ -7,7 +7,7 @@ ALL = random_packets
 all: $(ALL)
 
 clean:
-	rm -f *.o $(ALL)
+  rm -f *.o $(ALL)
 
 random_packets: random_packets.c util.o
 

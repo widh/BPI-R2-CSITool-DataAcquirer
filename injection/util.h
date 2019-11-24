@@ -10,4 +10,4 @@
 void generate_payloads(uint8_t *buffer, size_t buffer_size);
 int get_mac_address(uint8_t *buf, const char *ifname);
 
-#endif	/* __UTIL_H__ */
+#endif /* __UTIL_H__ */
