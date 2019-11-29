@@ -79,7 +79,7 @@ let UseCCK = UseHT === 1 ? 0 : UseCCKSelect;
  * 0)  No
  * 1)  Use
  */
-let UseGFP = 1;
+let UseGFP = 0;
 
 /* HT Channel
  * 0)  20 MHz

@@ -45,12 +45,12 @@ Please refer to [this README](https://github.com/wldh-g/15na-tools#readme).
 
 ## About channels, MIMO, MCS
 
-Initially the scripts are configured to use channel 64 in HT40- mode, and to use 2x3 MIMO.
+Initially the scripts are configured to use channel 64 in HT40- mode, and to use 1 Tx antenna.
 
 #### Changing Antennas (MIMO) & MCS
 
 You have to change `prepare_tx.sh`.
-In `# Set transaction rate` part of `prepare_tx.sh`, there is a strange hex integer: `0xcd09`. That may the only part you're going to modify.
+In `# Set transaction rate` part of `prepare_tx.sh`, there is a strange hex integer: `0x4d01`. That may the only part you're going to modify.
 
 Using `get_flags.js`, you can get proper flag code by giving the data rate and the number of antenna you use.
 
