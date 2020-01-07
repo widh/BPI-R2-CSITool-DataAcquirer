@@ -2,6 +2,8 @@
 
 This repository contains modified csitool for BPI-R2 for data acquisition.
 
+For now, this tool only supports IWL5300-based CSI collection.
+
 ## Preparation
 
 #### Kernel & Driver
