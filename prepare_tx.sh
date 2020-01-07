@@ -26,3 +26,4 @@ iw dev mon0 set channel 64 HT40-
 # Use 1 antenna, send with 1 stream
 # Run ./get_flag.js to get flags
 echo 0x4d01 | sudo tee `sudo find /sys -name monitor_tx_rate` 1>/dev/null
+

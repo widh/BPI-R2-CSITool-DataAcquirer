@@ -54,7 +54,7 @@ In `# Set transaction rate` part of `prepare_tx.sh`, there is a strange hex inte
 
 Using `get_flags.js`, you can get proper flag code by giving the data rate and the number of antenna you use.
 
-The detail for the flag is described at [here](https://github.com/wldh-g/BPI-R2-CSITool-Kernel/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L245-L333).
+The detail for the flag is described at [here](https://github.com/wldh-g/BPI-R2-CSITool-Kernel/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L245-L334).
 
 ## License
 

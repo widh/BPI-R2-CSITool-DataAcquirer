@@ -3,9 +3,11 @@
 // Only for IWLWIFI 5300 card!
 
 // ? Configuration Part
-// ? Modify below to generate a flag that meets to you
 
-/* High-throughput (HT) rate format
+/* High-throughput (HT) mode [20|40] */
+let HTMode = process.argv[2];
+
+/* HT rate format
  * 0)   6 Mbps
  * 1)  12 Mbps
  * 2)  18 Mbps
@@ -15,21 +17,21 @@
  * 6)  54 Mbps
  * 7)  60 Mbps
  */
-let DataRateCode = process.argv[2];
+let DataRateCode = process.argv[3];
 
 /* The number of Antennas [1-3] */
-let AntennaCount = process.argv[3];
+let AntennaCount = process.argv[4];
 
 // ! Assertion & Generation Part
-// ! DO NOT MODIFY BELOW
 
 /* Check inputs */
 let AntennaSelection = Number(AntennaCount);
 let DataRate = Number(DataRateCode);
-if (process.argv.length !== 4) {
+if (process.argv.length !== 5) {
   const sep = process.argv[1].indexOf('\\') >= 0 ? '\\' : '/';
   const file = process.argv[1].substring(process.argv[1].lastIndexOf(sep) + 1);
-  console.info(`Usage: ${file} DATA_RATE ANTENNA_COUNT\n`);
+  console.info(`Usage: ${file} HT_MODE DATA_RATE ANTENNA_COUNT\n`);
+  console.info('  HT_MODE       = [20|40]');
   console.info('  DATA_RATE     = [0-7]');
   console.info('  ANTENNA_COUNT = [1-3]\n');
   return;
@@ -47,6 +49,12 @@ if (process.argv.length !== 4) {
 ) {
   console.error(`Check data rate. It must be [0-7] : ${DataRateCode}`);
   return;
+} else if (
+  Number.isNaN(HTMode)
+  || (HTMode !== '20' && HTMode !== '40')
+) {
+  console.error(`Check ht mode. It must be [20|40] : ${HTMode}`);
+  return;
 }
 
 /* Streams
@@ -54,13 +62,14 @@ if (process.argv.length !== 4) {
  * 1)  Dual   (MIMO)
  * 2)  Triple (MIMO)
  */
-let StreamCount = AntennaSelection;
+let StreamCount = AntennaSelection - 1;
 
-/* 6 Mbps HT40 Duplicate Data
+/* HT Duplicate Data
  * 0)  Off
  * 1)  On
  */
-let HT40Duplicate = 0;
+let HTDuplicateSelection = 0;
+let HTDuplicate = HTMode === '40' ? HTDuplicateSelection : 0;
 
 /* Use High Throughput
  * 0)  Legacy Mode
@@ -79,20 +88,20 @@ let UseCCK = UseHT === 1 ? 0 : UseCCKSelect;
  * 0)  No
  * 1)  Use
  */
-let UseGFP = 0;
+let UseGFP = 1;
 
 /* HT Channel
- * 0)  20 MHz
- * 1)  40 MHz
+ * 0) 20 MHz (legacy)
+ * 1) 40 MHz
  */
-let HTChannel = 1;
+let HTChannel = HTMode === '20' ? 0 : 1;
 
-/* Duplicate HT40 to HT20
+/* Duplicate 20MHz channels in HT40
  * 0)  No
  * 1)  Yes
  */
-let HT20DuplicateSelection = 0;
-let HT20Duplicate = HTChannel === 1 ? HT20DuplicateSelection : 0;
+let DuplicateSelection = 0;
+let Duplicate = HTMode === 1 ? DuplicateSelection : 0;
 
 /* Use Short Guard Interval
  * 0)  Normal Guard Interval (0.8 us)
@@ -109,16 +118,15 @@ let UseAntenna3 = AntennaSelection >= 3;
 let RateFlags = (0b00000000000000000
   | DataRate
   | StreamCount << 3
-  | HT40Duplicate << 5
+  | HTDuplicate << 5
   | UseHT << 8
   | UseCCK << 9
   | UseGFP << 10
   | HTChannel << 11
-  | HT20Duplicate << 12
+  | Duplicate << 12
   | ShortGuardInterval << 13
   | UseAntenna1 << 14
   | UseAntenna2 << 15
   | UseAntenna3 << 16
 );
-console.log(`iwlagn rate flags     :  0x${RateFlags.toString(16)}`);
-console.log(`wanna bitwise detail? :  0b${RateFlags.toString(2)}`);
+console.log(`monitor_tx_rate: 0x${RateFlags.toString(16)} (0b${RateFlags.toString(2)})`);
