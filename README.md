@@ -1,14 +1,13 @@
-# BPI-R2 CSITool Data Collector
+# BPI-R2 Intel CSITool Data Collector
 
-This repository contains modified csitool for BPI-R2 for data acquisition.
-
-For now, this tool only supports IWL5300-based CSI collection.
+This repository contains modified csitool for BPI-R2 for data acquisition.  
+This tool only supports IWL5300-based CSI collection.
 
 ## Preparation
 
 #### Kernel & Driver
 
-Please refer [this README](https://github.com/wldh-g/BPI-R2-CSITool-Kernel#readme).
+Please refer [this README](https://github.com/wldh-g/BPI-R2-Intel-CSITool-Kernel#readme).
 
 #### Install `lorcon`
 
@@ -17,8 +16,8 @@ Please refer [this README](https://github.com/wldh-g/BPI-R2-CSITool-Kernel#readm
 
 #### Download this repository
 
-- Git clone `https://github.com/wldh-g/BPI-R2-CSITool-DataCollector`
-- `cd BPI-R2-CSITool-DataCollector`
+- Git clone `https://github.com/wldh-g/BPI-R2-Intel-CSITool-DataCollector`
+- `cd BPI-R2-Intel-CSITool-DataCollector`
 
 #### Install firmware
 
@@ -43,7 +42,8 @@ cd ./capture; make
 
 ## How to use recorded `.dat` file
 
-Please refer to [this README](https://github.com/wldh-g/15na-tools#readme).
+Here is the tools that I used to process dat file: [15na-tools](https://github.com/wldh-g/15na-tools#readme)  
+And here is the tool provided by the author of Intel CSITool, D. Halperin: [linux-80211n-csitool-supplementary](https://github.com/dhalperi/linux-80211n-csitool-supplementary)
 
 ## About channels, MIMO, MCS
 
@@ -56,7 +56,7 @@ In `# Set transaction rate` part of `prepare_tx.sh`, there is a strange hex inte
 
 Using `get_flags.js`, you can get proper flag code by giving the data rate and the number of antenna you use.
 
-The detail for the flag is described at [here](https://github.com/wldh-g/BPI-R2-CSITool-Kernel/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L245-L334).
+The detail for the flag is described at [here](https://github.com/wldh-g/BPI-R2-Intel-CSITool-Kernel/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L245-L334).
 
 ## License
 
