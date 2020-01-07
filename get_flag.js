@@ -56,7 +56,7 @@ if (process.argv.length !== 4) {
  */
 let StreamCount = AntennaSelection;
 
-/* 6 Mbps HT40 Duplicate Data
+/* HT40 Duplicate Data
  * 0)  Off
  * 1)  On
  */
