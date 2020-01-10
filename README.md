@@ -7,7 +7,7 @@ This tool only supports IWL5300-based CSI collection.
 
 #### Kernel & Driver
 
-Please refer [this README](https://github.com/wldh-g/BPI-R2-Intel-CSITool-Kernel#readme).
+Please refer [this README](https://github.com/wldh-g/BPI-R2-Intel-CSITool#readme).
 
 #### Install `lorcon`
 
