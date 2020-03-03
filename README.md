@@ -1,13 +1,16 @@
-# BPI-R2 Intel CSITool Data Collector
+# Intel CSITool Data Collector
 
-This repository contains modified csitool for BPI-R2 for data acquisition.  
+This repository contains modified csitool for data acquisition.  
 This tool only supports IWL5300-based CSI collection.
+
+These tools are tested with BPI-R2 device.
 
 ## Preparation
 
 #### Kernel & Driver
 
-Please refer [this README](https://github.com/wldh-g/BPI-R2-Intel-CSITool#readme).
+If you are using BPI-R2, please refer [this README](https://github.com/wldh-g/iwlwifi-csitool-r2#readme).
+If not, please look [here](https://github.com/dhalperi/linux-80211n-csitool).
 
 #### Install `lorcon`
 
@@ -16,8 +19,8 @@ Please refer [this README](https://github.com/wldh-g/BPI-R2-Intel-CSITool#readme
 
 #### Download this repository
 
-- Git clone `https://github.com/wldh-g/BPI-R2-Intel-CSITool-DataCollector`
-- `cd BPI-R2-Intel-CSITool-DataCollector`
+- Git clone `https://github.com/wldh-g/iwlwifi-csitool-apps`
+- `cd iwlwifi-csitool-apps`
 
 #### Install firmware
 
@@ -56,7 +59,7 @@ In `# Set transaction rate` part of `prepare_tx.sh`, there is a strange hex inte
 
 Using `get_flags.js`, you can get proper flag code by giving the data rate and the number of antenna you use.
 
-The detail for the flag is described at [here](https://github.com/wldh-g/BPI-R2-Intel-CSITool-Kernel/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L245-L334).
+The detail for the flag is described at [here](https://github.com/wldh-g/iwlwifi-csitool-r2/blob/master/drivers/net/wireless/iwlwifi/dvm/commands.h#L245-L334).
 
 ## License
 
